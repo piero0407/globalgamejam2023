@@ -1,5 +1,5 @@
 :: StoryTitle
-Roots
+Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la era moderna como un insecto
 
 
 :: StoryData
@@ -169,7 +169,6 @@ Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existen
 \::[[Espero comprobar si la existencia es hostil o no.|c26&c27][$current_event_difficulty = 2]]
 
 
-
 :: c18 {"position":"1050,275","size":"100,100"}
 <<set $spd += 1>>Huiste ^^
 
@@ -258,7 +257,6 @@ La existencia es hostil
 \::[[Huyo|c18&c19][$current_event_difficulty = 0]]
 \::[[Busco dónde esconderme|c20&c21][$current_event_difficulty = 0]]
 \::[[Peleo|c23&c24&c25]]
-
 
 
 :: c26&c27 {"position":"1700,150","size":"100,100"}
@@ -354,7 +352,55 @@ Es hora de encontrar una pareja.
 <<goto [[c01]]>>
 
 
-:: offspring stats [script] {"position":"225,725","size":"100,100"}
+:: res event {"position":"1400,0","size":"100,100"}
+<<if $res>=$skill_event_difficulty[$current_event_difficulty]>>
+<<set $res_result = true>>Resistes!
+<<else>>
+<<set $res_result = false>>No logras resistir...
+<</if>>
+
+
+:: spd event {"position":"1000,0","size":"100,100"}
+<<if $spd>=$skill_event_difficulty[$current_event_difficulty]>>
+<<set $spd_result = true>>Buena velocidad!
+<<else>>
+<<set $spd_result = false>>Eres muy lento...
+<</if>>
+
+
+:: start {"position":"100,100","size":"100,100"}
+<<silently>>
+<<set $starting_combat_min = 1>>
+<<set $starting_combat_max = 5>>
+<<set $combat_min = 1>>
+<<set $combat_max = 30>>
+<<set $combat_diff = 1>>
+
+<<set $starting_life_min = 10>>
+<<set $starting_life_max = 20>>
+<<set $life_min = 7>>
+<<set $life_max = 75>>
+<<set $life_diff = 2>>
+
+<<set $stat_reroll = 5>>
+<<set $current_stat_reroll = $stat_reroll>>
+<<set $generation = 0>>
+
+<<set $species = "">>
+
+<<set $skill_event_difficulty = [2, 4, 10, 15]>>
+
+<<set $chance_event_difficulty = [2, 4, 6, 8]>>
+<<set $chance_event_min = 1>>
+<<set $chance_event_max = 10>>
+
+<<set $current_event_difficulty = 0>>
+<</silently>>\
+\
+<<goto [[c01]]>>
+
+
+:: StoryScript [script]
 <<silently>>
 
 <<set _life_mod = random(-1 * ($life_diff + $generation), $life_diff + $generation)>>
@@ -417,51 +463,3 @@ Tu especie es $species
 <<if $current_stat_reroll >= 1>>\
 \::[["Prueba denuevo ("+$current_stat_reroll+")"|c06][$current_stat_reroll -= 1]]
 <</if>>
-
-
-:: res event {"position":"1400,0","size":"100,100"}
-<<if $res>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $res_result = true>>Resistes!
-<<else>>
-<<set $res_result = false>>No logras resistir...
-<</if>>
-
-
-:: spd event {"position":"1000,0","size":"100,100"}
-<<if $spd>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $spd_result = true>>Buena velocidad!
-<<else>>
-<<set $spd_result = false>>Eres muy lento...
-<</if>>
-
-
-:: start {"position":"100,100","size":"100,100"}
-<<silently>>
-<<set $starting_combat_min = 1>>
-<<set $starting_combat_max = 5>>
-<<set $combat_min = 1>>
-<<set $combat_max = 30>>
-<<set $combat_diff = 1>>
-
-<<set $starting_life_min = 10>>
-<<set $starting_life_max = 20>>
-<<set $life_min = 7>>
-<<set $life_max = 75>>
-<<set $life_diff = 2>>
-
-<<set $stat_reroll = 5>>
-<<set $current_stat_reroll = $stat_reroll>>
-<<set $generation = 0>>
-
-<<set $species = "">>
-
-<<set $skill_event_difficulty = [2, 4, 10, 15]>>
-
-<<set $chance_event_difficulty = [2, 4, 6, 8]>>
-<<set $chance_event_min = 1>>
-<<set $chance_event_max = 10>>
-
-<<set $current_event_difficulty = 0>>
-<</silently>>\
-\
-<<goto [[c01]]>>

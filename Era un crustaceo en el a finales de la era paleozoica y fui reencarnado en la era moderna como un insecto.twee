@@ -7,7 +7,7 @@ Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la er
   "ifid": "578AC5F3-4BAE-44BB-AD73-58EBCA88D6FD",
   "format": "SugarCube",
   "format-version": "2.36.1",
-  "start": "c09",
+  "start": "start",
   "tag-colors": {
     "script": "purple",
     "a": "red"
@@ -132,7 +132,7 @@ Chance: Muy Facil (%<<print ($chance_event_max - $chance_event_difficulty[0]) / 
 
 
 :: c11 {"position":"800,375","size":"100,100"}
-<<set $amount_increased = 2>><<include [[res increased]]>>
+<<set $amount_increased = 2>><<include [[res increased]]>>\
 
 
 Encontraste una concha. La puedes usar como protección y camuflaje.
@@ -154,8 +154,8 @@ Encontraste una concha. La puedes usar como protección y camuflaje.
 Parece ser el exoesqueleto de algún animal. Puede ser peligroso así que lo dejas ahí y te vas corriendo. Run bitch.
 
 
-\::[[Run bitch.|c13]] | Chance: Muy Facil (80%)
-\::[[Run bitch. But faster.|c13]]
+<<timed 2s>>[[Run bitch.|c13]] <span class="bold very-easy">| Chance: Muy Facil (80%)</span><</timed>>
+<<timed 2.15s>>[[Run bitch. But faster.|c13]]<</timed>>
 
 
 :: c12&c14 {"position":"550,250","size":"100,100"}
@@ -174,17 +174,17 @@ Parece ser el exoesqueleto de algún animal. Puede ser peligroso así que lo dej
 Huyes por tu vida sin mirar atrás.
 
 
-\::[[Siguiente|c31]]
+<<timed 3s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c14 {"position":"550,375","size":"100,100"}
-<<set $amount_increased = -2>><<include [[life increased]]>>
+<<set $amount_increased = +2>><<include [[camo increased]]>>\
 
 
 Encontraste una cuevita.
 
 
-\::[[Siguiente|c31]]
+<<timed 1s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c16 {"position":"350,725","size":"100,100"}
@@ -205,7 +205,7 @@ Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existen
 
 
 :: c18 {"position":"1050,375","size":"100,100"}
-<<include [[spd increased][$amount_increased = 1]]>>
+<<include [[spd increased][$amount_increased = 1]]>>\
 
 
 Huiste ^^
@@ -224,7 +224,7 @@ Huiste ^^
 
 
 :: c19 {"position":"950,375","size":"100,100"}
-<<set $amount_increased = -2>><<include [[life increased]]>>
+<<set $amount_increased = -2>><<include [[life increased]]>>\
 
 
 Te quitaron una antena.
@@ -234,16 +234,16 @@ Te quitaron una antena.
 
 
 :: c20 {"position":"1175,375","size":"100,100"}
-<<set $amount_increased = 1>><<include [[camo increased]]>>
+<<set $amount_increased = 1>><<include [[camo increased]]>>\
 
 
 Encuentro una cuevita.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
-:: c20&c21 {"position":"1225,250","size":"100,100"}
+:: c20&c21 {"position":"1225,225","size":"100,100"}
 <<include [[camo event]]>>\
 <<if $camo_result === -1>>
 <<include [[c21]]>>
@@ -267,7 +267,7 @@ Tu cuerpo se convierte en parte de la evolución. Tu adn se fusiona con la exist
 
 :: c23 {"position":"1400,375","size":"100,100"}
 <<set $amount_increased = -1>><<include [[life increased]]>>, \
-<<set $amount_increased = 1>><<include [[res increased]]>>
+<<set $amount_increased = 1>><<include [[res increased]]>>\
 
 
 Lo vences y aprovechas para recolectar alimento.
@@ -289,7 +289,7 @@ Lo vences y aprovechas para recolectar alimento.
 
 :: c24 {"position":"1500,375","size":"100,100"}
 <<set $amount_increased = -3>><<include [[life increased]]>>, \
-<<set $amount_increased = 1>><<include [[spd increased]]>>
+<<set $amount_increased = 1>><<include [[spd increased]]>>\
 
 
 Te deja mal herido pero logras escapar.
@@ -356,7 +356,7 @@ Espera, hay un objeto ahí, ¿qué es eso?
 Encontraste un grupo de protozoarios. Te alimentas hasta quedar satisfecho y eres una existencia feliz.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c30 {"position":"1075,625","size":"100,100"}
@@ -367,7 +367,7 @@ Encontraste un grupo de protozoarios. Te alimentas hasta quedar satisfecho y ere
 Sigues buscando alimento pero parece que no hay nada en leguas. Tu pancita suena. Parece que alguien se irá a dormir sin comer.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c31 {"position":"1050,800","size":"100,100"}
@@ -408,15 +408,16 @@ El éxito de tu reproducción dependerá de cuánto hayas aumentado tus habilida
 Ahora, vamos a buscar una existencia que esté a la altura de tus cualidades. Las criaturas no lloran, las criaturas facturan…huevecillos.
 
 
-\::[[Estoy lista.|c36&c37][$event_difficulty = 1]]
-\::[[Cambié de parecer. No quiero esa responsabilidad.|c40]]
+<<timed 2s>>[[Estoy lista.|c36&c37][$event_difficulty = 1]]<</timed>>
+<<timed 2.15s>>[[Cambié de parecer. No quiero esa responsabilidad.|c40]]<</timed>>
+
 
 
 :: c36 {"position":"650,850","size":"100,100"}
 Oh, pequeña criatura. Tu existencia no es suficiente para producir vidas. Regresa cuando tengas más energía.
 
 
-\::[[Siguiente|c40]]
+<<timed 2s>>[[Siguiente|c40]]<</timed>>
 
 
 :: c36&43 {"position":"1050,1050","size":"100,100"}
@@ -441,8 +442,8 @@ Oh, pequeña criatura. Tu existencia no es suficiente para producir vidas. Regre
 Es momento de lanzar feromonas. Sacúdete, nena.
 
 
-\::[[Procedo a sacudirme con violencia. No tengo 5 pares de patas por las puras.|c38&c39a][$event_difficulty = 1]]
-\::[[Me sacudo moderadamente. Una tiene que guardar la dignidad.|c38&c39b][$event_difficulty = 2]]
+<<timed 1s>>[[Procedo a sacudirme con violencia. No tengo 5 pares de patas por las puras.|c38&c39a][$event_difficulty = 1]]<</timed>>
+<<timed 1.15s>>[[Me sacudo moderadamente. Una tiene que guardar la dignidad.|c38&c39b][$event_difficulty = 2]]<</timed>>
 
 
 :: c38 {"position":"550,1225","size":"100,100"}
@@ -455,7 +456,7 @@ Es momento de lanzar feromonas. Sacúdete, nena.
 Vino un criaturón dispuesto a fecundar tus huevecillos. Eres el éxito reproductivo.
 
 
-\::[[Continuar|c41]]
+<<timed 2s>>[[Continuar|c41]]<</timed>>
 
 
 :: c38&c39a {"position":"675,1125","size":"100,100"}
@@ -480,35 +481,35 @@ Vino un criaturón dispuesto a fecundar tus huevecillos. Eres el éxito reproduc
 Vino un criatura pequeña y curiosilla pero parece dispuesto a fecundar tus huevecillos. Esperemos que al menos la mitad de tus hijos sobrevivan. Hey, pero lo hiciste.
 
 
-\::[[Continuar|c40]]
+<<timed 2s>>[[Continuar|c40]]<</timed>>
 
 
 :: c40 {"position":"550,1000","size":"100,100"}
 No te preocupes. No te reproduces y eventualmente mueres sola, devorada por un depredador de estaba de paso. Tu adn se combina con la materia orgánica que eventualmente sirve para la creación de nuevas criaturas.
 
 
-\::[[Continuar|c01]]
+<<timed 2s>>[[Continuar|c01]]<</timed>>
 
 
 :: c41 {"position":"550,1350","size":"100,100"}
 Eventualmente mueres *insertar decendiente bicho*
 
 
-\::[[Siguiente|i01]]
+<<timed 1s>>[[Siguiente|i01]]<</timed>>
 
 
 :: c42 {"position":"1050,925","size":"100,100"}
-\::[[Estoy listo.|c36&43][$event_difficulty = 1]]
-\::[[Cambié de parecer. No quiero esa responsabilidad.|c60]]
+<<timed 1s>>[[Estoy listo.|c36&43][$event_difficulty = 1]]<</timed>>
+<<timed 1.15s>>[[Cambié de parecer. No quiero esa responsabilidad.|c60]]<</timed>>
 
 
 :: c43 {"position":"1050,1175","size":"100,100"}
 Es momento de buscar feromonas.
 
 
-\::[[Procedo a caminar 10 leguas a la redonda.|c44&c45a][$event_difficulty = 1]]
-\::[[Procedo a caminar por mi sector.|c44&c45b][$event_difficulty = 3]]
-\::[[Cambié de parecer. No quiero esa responsabilidad.|c60]]
+<<timed 1s>>[[Procedo a caminar 10 leguas a la redonda.|c44&c45a][$event_difficulty = 1]]<</timed>>
+<<timed 1.15s>>[[Procedo a caminar por mi sector.|c44&c45b][$event_difficulty = 3]]<</timed>>
+<<timed 1.3s>>[[Cambié de parecer. No quiero esa responsabilidad.|c60]]<</timed>>
 
 
 :: c44 {"position":"1325,1125","size":"100,100"}
@@ -521,7 +522,7 @@ Es momento de buscar feromonas.
 Encontraste un criaturón que te mira con ojos de deseo y sus antenas claman para que te acerques y le des todo tu amor.
 
 
-\::[[Continuar|c46]]
+<<timed 2s>>[[Continuar|c46]]<</timed>>
 
 
 :: c44&c45a {"position":"1200,1125","size":"100,100"}
@@ -546,13 +547,13 @@ Encontraste un criaturón que te mira con ojos de deseo y sus antenas claman par
 Encontraste una pequeña criatura que te mira con ojos brillantes y te acercas tímidamente para darle toda tu ternura.
 
 
-\::[[Continuar|c46]]
+<<timed 2s>>[[Continuar|c46]]<</timed>>
 
 
 :: c46 {"position":"1325,1350","size":"100,100"}
 Te reprodujiste con éxito. Sobreviviste hasta este punto y evolucionaste. Darwin estaría orgulloso.
 
-\::[[Continuar|c41]]
+<<timed 1s>>[[Continuar|c41]]<</timed>>
 
 
 :: c47 {"position":"1700,800","size":"100,100"}
@@ -562,14 +563,9 @@ Este mundo está lleno de lugares y eventos que se crean y recrean todo el tiemp
 Espera… eso que viene ahí, ¿qué rayos es?
 Acaso, ¿es una corriente? O no, si te dejas arrastrar por ella podría llevarte por lugares que aún no exploras. ¿Qué harás?"
 
-\::[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]
-\::[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]
-\::[[Buscas ayuda de otras criaturas|c53&c54][$event_difficulty = 3]]
-
-
-
-
-
+<<timed 3s>>[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]<</timed>>
+<<timed 3.15s>>[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]<</timed>>
+<<timed 3.3s>>[[Buscas ayuda de otras criaturas|c53&c54][$event_difficulty = 3]]<</timed>>
 
 
 :: c48 {"position":"1575,1050","size":"100,100"}
@@ -580,7 +576,7 @@ Acaso, ¿es una corriente? O no, si te dejas arrastrar por ella podría llevarte
 Resistes pero estás en un área nueva y desconocida con algunas criaturas sobrevivientes.
 
 
-\::[[Siguiente|c41]]
+<<timed 1s>>[[Siguiente|c41]]<</timed>>
 
 
 :: c48&c49&c50 {"position":"1575,925","size":"100,100"}
@@ -602,14 +598,14 @@ Resistes pero estás en un área nueva y desconocida con algunas criaturas sobre
 No resistes. Tienes daños.
 
 
-\::[[Siguiente|c41]]
+<<timed 1s>>[[Siguiente|c41]]<</timed>>
 
 
 :: c50 {"position":"1450,1050","size":"100,100"}
 No resistes. Tu visión se va apagando. De pronto...
 
 
-\::[[Continuar|c01]]
+<<timed 1s>>[[Continuar|c01]]<</timed>>
 
 
 :: c51 {"position":"1925,1050","size":"100,100"}
@@ -619,7 +615,7 @@ No resistes. Tu visión se va apagando. De pronto...
 Escapas, vez cómo otras criaturas se van con la corriente.
 
 
-\::[[Siguiente|c41]]
+<<timed 1s>>[[Siguiente|c41]]<</timed>>
 
 
 :: c51&c52 {"position":"1875,925","size":"100,100"}
@@ -635,16 +631,16 @@ Escapas, vez cómo otras criaturas se van con la corriente.
 No escapas.
 
 
-\::[[Intentas Resistir|c48&c49&c50]]
-\::[[Te dejas llevar.|c50]]
+<<timed 1s>>[[Intentas Resistir|c48&c49&c50]]<</timed>>
+<<timed 1.15s>>[[Te dejas llevar.|c50]]<</timed>>
 
 
 :: c53 {"position":"2050,1050","size":"100,100"}
 Se juntan para resistir juntos la corriente y sobrevivir lo más posible
 
 
-\::[[Tratan juntos de resistir|c56&c57]]
-\::[[Tratan juntos de escapar|c58&c59]]
+<<timed 1s>>[[Tratan juntos de resistir|c56&c57]]<</timed>>
+<<timed 1.15s>>[[Tratan juntos de escapar|c58&c59]]<</timed>>
 
 
 :: c53&c54 {"position":"2100,925","size":"100,100"}
@@ -660,14 +656,14 @@ Se juntan para resistir juntos la corriente y sobrevivir lo más posible
 Te ignoran.
 
 
-\::[[Continuar|c55]]
+<<timed 1s>>[[Continuar|c55]]<</timed>>
 
 
 :: c55 {"position":"2200,700","size":"100,100"}
 Debes elegir nuevamente.
 
-\::[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]
-\::[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]
+<<timed 1s>>[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]<</timed>>
+<<timed 1.15s>>[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]<</timed>>
 
 
 :: c56 {"position":"2000,1300","size":"100,100"}
@@ -678,7 +674,7 @@ Debes elegir nuevamente.
 Resisten, como una colonia se han unido y han sobrevivido. Algunos con algunos daños menores. Estas sorprendentemente ilesa.
 
 
-\::[[Siguiente|c34]]
+<<timed 1s>>[[Siguiente|c34]]<</timed>>
 
 
 :: c56&c57 {"position":"1950,1175","size":"100,100"}
@@ -697,7 +693,7 @@ Resisten, como una colonia se han unido y han sobrevivido. Algunos con algunos d
 No resisten. Tienen daños mayores. Están perdidos. Pero están juntos.
 
 
-\::[[Siguiente|c34]]
+<<timed 1s>>[[Siguiente|c34]]<</timed>>
 
 
 :: c58 {"position":"2200,1300","size":"100,100"}
@@ -707,7 +703,7 @@ No resisten. Tienen daños mayores. Están perdidos. Pero están juntos.
 Escapan. Todos a salvo.
 
 
-\::[[Siguiente|c34]]
+<<timed 1s>>[[Siguiente|c34]]<</timed>>
 
 
 :: c58&c59 {"position":"2150,1175","size":"100,100"}
@@ -723,14 +719,14 @@ Escapan. Todos a salvo.
 No escapan.
 
 
-\::[[Tratan juntos de resistir.|c56&c57]]
+<<timed 1s>>[[Tratan juntos de resistir.|c56&c57]]<</timed>>
 
 
 :: c60 {"position":"1250,1000","size":"100,100"}
 No te preocupes. No te reproduces y eventualmente mueres solo, devorado por un depredador de estaba de paso. Tu adn se combina con la materia orgánica que eventualmente sirve para la creación de nuevas criaturas.
 
 
-\::[[Continuar|c01]]
+<<timed 2s>>[[Continuar|c01]]<</timed>>
 
 
 :: camo event {"position":"550,100","size":"100,100"}
@@ -747,14 +743,18 @@ No te preocupes. No te reproduces y eventualmente mueres solo, devorado por un d
 :: camo increased {"position":"550,0","size":"100,100"}
 <<set $camo += $amount_increased>>\
 <<if $amount_increased > 0>>\
+<div class="pop-message green">\
 <<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
-+\
-<</for>>\
+ +\
+<</for>>Camuflaje\
+</div>
 <<elseif $amount_increased < 0>>\
+<div class="pop-message red">\
 <<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
--\
-<</for>>\
-<</if>>Camuflaje\
+ -\
+<</for>>  Camuflaje\
+</div>\
+<</if>>\
 
 
 :: chance event {"position":"750,100","size":"100,100"}
@@ -779,29 +779,22 @@ No te preocupes. No te reproduces y eventualmente mueres solo, devorado por un d
 :: i01 {"position":"100,1600","size":"100,100"}
 
 
-:: spd event {"position":"1000,0","size":"100,100"}
-<<if $spd>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $spd_result = true>>Buena velocidad!
-<<else>>
-<<set $spd_result = false>>Eres muy lento...
-<</if>>
-
-<<set $current_event_difficulty = 0>>
-<</silently>>\
-\
-<<goto [[c01]]>>
 
 :: life increased {"position":"1225,0","size":"100,100"}
 <<set $life += $amount_increased>>\
 <<if $amount_increased > 0>>\
+<div class="pop-message green">\
 <<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
-+\
-<</for>>\
+ +\
+<</for>>Vida\
+</div>
 <<elseif $amount_increased < 0>>\
+<div class="pop-message red">\
 <<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
--\
-<</for>>\
-<</if>>Vida\
+ -\
+<</for>>  Vida\
+</div>\
+<</if>>\
 
 
 :: offspring stats {"position":"325,1125","size":"100,100"}
@@ -819,13 +812,13 @@ No te preocupes. No te reproduces y eventualmente mueres solo, devorado por un d
 <<set _spd_mod = random(-1 * ($combat_diff + $generation), $combat_diff + $generation)>>
 <<set $spd = Math.clamp($parent_spd + _spd_mod, $combat_min, $combat_max)>>
 
-*/
+/*
 Calculate species
 	life es 0
 	res es 1
 	camo es 2
 	spd es 3
-/*
+*/
 
 <<set $stats = [
 {statID: 0, statValue: $life}, 
@@ -883,14 +876,31 @@ Tu especie es $species
 :: res increased {"position":"1450,0","size":"100,100"}
 <<set $res += $amount_increased>>\
 <<if $amount_increased > 0>>\
-<<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
-+\
-<</for>>\
+<div class="pop-message green">\
+  <<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
+   +\
+  <</for>>Resistencia\
+</div>
 <<elseif $amount_increased < 0>>\
-<<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
--\
-<</for>>\
-<</if>>Resistencia\
+<div class="pop-message red">\
+  <<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
+   -\
+  <</for>>  Resistencia\
+</div>\
+<</if>>\
+
+
+:: spd event {"position":"1000,0","size":"100,100"}
+<<if $spd>=$skill_event_difficulty[$current_event_difficulty]>>
+<<set $spd_result = true>>Buena velocidad!
+<<else>>
+<<set $spd_result = false>>Eres muy lento...
+<</if>>
+
+<<set $current_event_difficulty = 0>>
+<</silently>>\
+\
+<<goto [[c01]]>>
 
 
 :: spd event {"position":"1000,100","size":"100,100"}
@@ -907,14 +917,18 @@ Tu especie es $species
 :: spd increased {"position":"1000,0","size":"100,100"}
 <<set $spd += $amount_increased>>\
 <<if $amount_increased > 0>>\
+<div class="pop-message green">\
 <<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
-+\
-<</for>>\
+ +\
+<</for>>Velocidad\
+</div>
 <<elseif $amount_increased < 0>>\
+<div class="pop-message red">\
 <<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
--\
-<</for>>\
-<</if>>Velocidad\
+ -\
+<</for>>  Velocidad\
+</div>\
+<</if>>\
 
 
 :: start {"position":"100,100","size":"100,100"}
@@ -1007,3 +1021,26 @@ body{
 .bold{
 	font-weight: bold;
 }
+
+.pop-message{
+	border-radius: 10px;
+  	overflow: hidden;
+  	text-align: center;
+  	font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pop-message.red{
+  	background-color: red; 
+    color: white;
+  	border: 1px red;
+  	margin: 10px 5px;
+ }
+
+.pop-message.green{
+  	background-color: green; 
+    color: white;
+  	border: 1px green;
+ }

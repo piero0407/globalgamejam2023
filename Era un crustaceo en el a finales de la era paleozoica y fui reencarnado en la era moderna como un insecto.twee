@@ -7,55 +7,52 @@ Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la er
   "ifid": "578AC5F3-4BAE-44BB-AD73-58EBCA88D6FD",
   "format": "SugarCube",
   "format-version": "2.36.1",
-  "start": "start",
+  "start": "c09",
   "tag-colors": {
     "script": "purple",
     "a": "red"
   },
-  "zoom": 1
+  "zoom": 0.6
 }
 
 
 :: StoryCaption {"position":"334.5,139","size":"100,100"}
 <<if $name>>
-Name: $name
-Vida: $life
-Resistencia: $res
-Camuflaje: $camo
-Velocidad: $spd
+''Name'': ''$name''
+''Vida'': ''$life''
+''Resistencia'': ''$res''
+''Camuflaje'': ''$camo''
+''Velocidad'': ''$spd''
 <</if>>
 
 
-:: c01 {"position":"100,225","size":"100,100"}
+:: c01 {"position":"98,225","size":"100,100"}
 <<unset $name>>
 <<include [[StoryCaption]]>>
 
 Todo está oscuro. A donde sea que mires el vacío impera pero no sientes miedo. De hecho no sientes nada. 
 
 <<timed 2s>>
-¿Siquiera estás vivo?
+''¿Siquiera estás vivo?''
 <</timed>>
 
-<<timed 4s>>
-\::[[Sí|c02]]
-\::[[No|c02]]
-\::[[No sé, tú dime|c02]]
-<</timed>>
+<<timed 4s>>[[Sí|c02]]<</timed>>
+<<timed 4.15s>>[[No|c02]]<</timed>>
+<<timed 4.3s>>[[No sé, tú dime|c02]]<</timed>>
 
 
 :: c02 {"position":"100,350","size":"100,100"}
 De pronto ves luz. ¿Es eso un túnel? ¿Una explosión? 
 La luz se acerca velozmente hacia tu dirección y sientes el peligro. Quieres escapar y comienzas a moverte. ¿Corres? ¿Nadas? ¿Vuelas?  No lo sabes, pero te mueves tan rápido como te da el cuerpo. La luz te atrapa y ahora… todo está oscuro.
 
-
-\::[[Continuar|c03]]
+<<timed 3s>>[[Continuar|c03]]<</timed>>
 
 
 :: c03 {"position":"100,475","size":"100,100"}
 "Hola, pequeña existencia. Bienvenida al mundo antes del mundo. Al preámbulo de la historia. A la pre-historia je. Estás a punto de ser enviado a un mundo recién creado y tu misión es simple: sobrevivir."
 
 
-\::[[Continuar|c04]]
+<<timed 3s>>[[Continuar|c04]]<</timed>>
 
 
 :: c04 {"position":"105,602","size":"100,100"}
@@ -65,9 +62,9 @@ y a veces no. Escoge sabiamente con qué armas quieres defenderte y recuerda que
 
 
 <<if $generation !== 0>>
-\::[[Continuar|offspring stats]]
+<<timed 3s>>[[Continuar|offspring stats]]<</timed>>
 <<else>>
-\::[[Continuar|c05]]
+<<timed 3s>>[[Continuar|c05]]<</timed>>
 <</if>>
 
 
@@ -79,59 +76,59 @@ y a veces no. Escoge sabiamente con qué armas quieres defenderte y recuerda que
 <<set $spd to random($starting_combat_min, $starting_combat_max)>>
 <</silently>>\
 \
-Tu vida es $life | ($starting_life_min - $starting_life_max)
-Tu resistencia es $res | ($starting_combat_min - $starting_combat_max)
-Tu camuflaje es $camo | ($starting_combat_min - $starting_combat_max)
-Tu velocidad es $spd | ($starting_combat_min - $starting_combat_max)
+Tu ''vida'' es ''$life'' | ($starting_life_min - $starting_life_max)
+Tu ''resistencia'' es ''$res'' | ($starting_combat_min - $starting_combat_max)
+Tu ''camuflaje'' es ''$camo'' | ($starting_combat_min - $starting_combat_max)
+Tu ''velocidad'' es ''$spd'' | ($starting_combat_min - $starting_combat_max)
 
 
-\::[[Elige tu nombre|c06][$current_stat_reroll = $stat_reroll]]
+[[Elige tu nombre|c06][$current_stat_reroll = $stat_reroll]]
 <<if $current_stat_reroll >= 1>>\
-\::[["Prueba denuevo ("+$current_stat_reroll+")"|c05][$current_stat_reroll -= 1]]
+[["Prueba denuevo ("+$current_stat_reroll+")"|c05][$current_stat_reroll -= 1]]
 <</if>>
 
 
 :: c06 {"position":"100,850","size":"100,100"}
-Nombra a tu bicho: <<textbox "$name" "">>
+''Nombra a tu criatura'': <<textbox "$name" "">>
 
 
-\::[[Empezar juego|c07]]
+[[Empezar juego|c07]]
 
 
 :: c07 {"position":"310,338","size":"100,100"}
-<<include [[StoryCaption]]>>
+<<silently>><<include [[StoryCaption]]>><</silently>>
 
 Comienza la aventura.  ¿Quieres probar qué puedes hacer con tus habilidades?
 
 
-\::[[Sí, vamos con todo.|c09]]
-\::[[No, ¿qué más hay?|c08]]
+<<timed 2s>>[[Sí, vamos con todo.|c09]]<</timed>>
+<<timed 2.15s>>[[No, ¿qué más hay?|c08]]<</timed>>
 
 
 :: c08 {"position":"249,563","size":"100,100"}
 No pasa nada. Te mantienes tal como estás hasta que mueres y tu código genético sirve para la siguiente generación de existencias. Pero para eso faltan decenas de milenios, mientras tanto…
 
-[[Continuar|c01]]
+<<timed 2s>>[[Continuar|c01]]<</timed>>
 
 
 :: c09 {"position":"350,475","size":"100,100"}
 Muy bien. “Quien tenga miedo a morir que no nazca”. 
 Eres una pequeña existencia a la que le queda mucho por descubrir y vivir en este increíble mundo emergente. Poco a poco te estás acostumbrando a tu nuevo ambiente. Es un poco acuoso pero parece que tu cuerpo se adaptó y ahora te puedes mover libremente.
 
-\::[[Explora el ambiente|c10]]
-\::[[Busca dónde esconderte|c12&c14][$current_event_difficulty = 0]] | Camuflaje: Muy Facil
-\::[[Quédate ahí mismo, total… está cómodo|c17]]
-\::[[Acabo de nacer, parece que no soy autótrofo y no he comido nada. Voy a buscar algo para comer.|c28]]
+<<timed 3s>>[[Explora el ambiente|c10]]<</timed>>
+<<timed 3.15s>>[[Busca dónde esconderte|c12&c14][$current_event_difficulty = 0]] <span class="very-easy bold">| Camuflaje: Muy Facil </span><</timed>>
+<<timed 3.3s>>[[Quédate ahí mismo, total… está cómodo|c17]]<</timed>>
+<<timed 3.45s>>[[Acabo de nacer, parece que no soy autótrofo y no he comido nada. Voy a buscar algo para comer.|c28]]<</timed>>
 
 
-:: c10 {"position":"350,600","size":"100,100"}
+:: c10 {"position":"351,599","size":"100,100"}
 "Mientras más nadas, más te acostumbras a tu nuevo cuerpo y al nuevo ambiente. Buscas más existencias además de la tuya. Entraste a un nuevo sector. Parece que el agua es más dulce. Qué curioso.
 Todo despejado, parece que no hay nada…todavía.
 Espera, hay un objeto ahí, ¿qué es eso? "
 
-\::[[Acercarse|c11&c12][$current_event_difficulty = 0]] | \
-Chance: Muy Facil (%<<print ($chance_event_max - $chance_event_difficulty[0]) / $chance_event_max * 100>>)
-\::[[Pasar de largo|c16]]
+<<timed 3s>>[[Acercarse|c11&c12][$current_event_difficulty = 0]] | \
+Chance: Muy Facil (%<<print ($chance_event_max - $chance_event_difficulty[0]) / $chance_event_max * 100>>)<</timed>>
+<<timed 3.15s>>[[Pasar de largo|c16]]<</timed>>
 
 
 :: c11 {"position":"750,275","size":"100,100"}
@@ -139,7 +136,7 @@ Chance: Muy Facil (%<<print ($chance_event_max - $chance_event_difficulty[0]) / 
 Encontraste una concha. La puedes usar como protección y camuflaje.
 
 
-\::[[Continuar|c31]]
+<<timed 2s>>[[Continuar|c31]]<</timed>>
 
 
 :: c11&c12 {"position":"700,150","size":"100,100"}
@@ -155,7 +152,7 @@ Encontraste una concha. La puedes usar como protección y camuflaje.
 \::[[Continuar|c31]]
 
 
-:: c12&c14 {"position":"550,150","size":"100,100"}
+:: c12&c14 {"position":"522,173","size":"100,100"}
 <<include [[camo event]]>>\
 <<if $camo_result === true>>
 <<include [[c14]]>>
@@ -164,35 +161,35 @@ Encontraste una concha. La puedes usar como protección y camuflaje.
 <</if>>
 
 
-:: c14 {"position":"500,275","size":"100,100"}
+:: c14 {"position":"548,332","size":"100,100"}
 <<set $camo += 2>>\
 Encontraste una cuevita.
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c16 {"position":"350,725","size":"100,100"}
 Nacer difícil. Te quedas mimi. zzzzz
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c17 {"position":"475,725","size":"100,100"}
 Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existencia.
 
 
-\::[[Huyo|c18&c19][$current_event_difficulty = 0]]
-\::[[Busco dónde esconderme|c20&c21][$current_event_difficulty = 0]]
-\::[[Peleo|c23&c24&c25]]
-\::[[Espero comprobar si la existencia es hostil o no.|c26&c27][$current_event_difficulty = 2]]
+<<timed 3s>>[[Huyo|c18&c19][$current_event_difficulty = 0]]<</timed>>
+<<timed 3.15s>>[[Busco dónde esconderme|c20&c21][$current_event_difficulty = 0]]<</timed>>
+<<timed 3.3s>>[[Peleo|c23&c24&c25]]<</timed>>
+<<timed 3.45s>>[[Espero comprobar si la existencia es hostil o no.|c26&c27][$current_event_difficulty = 2]]<</timed>>
 
 
 :: c18 {"position":"1050,275","size":"100,100"}
 <<set $spd += 1>>Huiste ^^
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c18&c19 {"position":"1000,150","size":"100,100"}
@@ -208,7 +205,7 @@ Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existen
 <<set $life -= 2>>Te quitaron una antena.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c20 {"position":"1175,275","size":"100,100"}
@@ -228,20 +225,20 @@ Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existen
 Es campo abierto. Jaja salu2.
 
 
-\::[[Continuar|c22]]
+<<timed 2s>>[[Continuar|c22]]<</timed>>
 
 
 :: c22 {"position":"1200,500","size":"100,100"}
 Tu cuerpo se convierte en parte de la evolución. Tu adn se fusiona con la existencia que te consumió y eventualmente desaparece en la inmensidad de la materia orgánica. De pronto…
 
-\::[[Siguiente|c01]
+<<timed 2s>>[[Siguiente|c01]<</timed>>
 
 
 :: c23 {"position":"1400,275","size":"100,100"}
 Lo vences y aprovechas para recolectar alimento.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c23&c24&c25 {"position":"1450,150","size":"100,100"}
@@ -259,14 +256,14 @@ Lo vences y aprovechas para recolectar alimento.
 Te deja mal herido pero logras escapar.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c25 {"position":"1500,500","size":"100,100"}
 Ambos midieron sus fuerzas y son iguales. Se van pero mirándose grueso.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c26 {"position":"1700,0","size":"100,100"}
@@ -291,7 +288,7 @@ La existencia es hostil
 La existencia no es hostil.
 
 
-\::[[Siguiente|c31]]
+<<timed 2s>>[[Siguiente|c31]]<</timed>>
 
 
 :: c28 {"position":"1000,700","size":"100,100"}
@@ -304,30 +301,30 @@ Parece que el agua es más dulce. Qué curioso. Todo despejado, parece que no ha
 Espera, hay un objeto ahí, ¿qué es eso?
 
 
-\::[[Acercarse|c25]]
-\::[[Te da miedo lo desconocido y pasas de largo|c25]]
+<<timed 3s>>[[Acercarse|c25]]<</timed>>
+<<timed 3.15s>>[[Te da miedo lo desconocido y pasas de largo|c25]]<</timed>>
 
 
 :: c31 {"position":"1000,1000","size":"100,100"}
 Mira… a la que en un futuro conocerán como luna, se oculta y comienza un nuevo día. Un día más ……agregar texto aquí……. . “El futuro es de aquellos que siguen avanzando”.
 
 
-\::[[Continuar|c32]]
+<<timed 2s>>[[Continuar|c32]]<</timed>>
 
 
 :: c32 {"position":"1000,1125","size":"100,100"}
 Eres una existencia en constante crecimiento. Cada día que pasa aprendes más sobre este mundo y sobre ti. Mira tus patitas, son cinco pares preciosos  cada vez más fuertes, cada vez más largos. Tus habilidades de supervivencia han cambiado también: algunas aumentaron, algunas disminuyeron. Lo cierto es que no eres el mismo que inició este viaje.
 
 
-\::[[Yo también lo siento|c33]]
-\::[[No sé, ah… siento que falta más|c33]]
+<<timed 3s>>[[Yo también lo siento|c33]]<</timed>>
+<<timed 3.15s>>[[No sé, ah… siento que falta más|c33]]<</timed>>
 
 
 :: c33 {"position":"1000,1250","size":"100,100"}
 Vamos por el siguiente paso entonces.
 
 
-\::[[Siguiente|c34]]
+<<timed 2s>>[[Siguiente|c34]]<</timed>>
 
 
 :: c34 {"position":"1000,1375","size":"100,100"}
@@ -335,9 +332,9 @@ Es hora de encontrar una pareja.
 ¿En qué mood estás hoy día, pequeña existencia?
 
 
-\::[[Me siento súper femenina ;D|c35]]
-\::[[Soy masculino a morir :-P|c35]]
-\::[[Cualquiera de los dos uwu|c35]]
+<<timed 2s>>[[Me siento súper femenina ;D|c35]]<</timed>>
+<<timed 2.15s>>[[Soy masculino a morir :-P|c35]]<</timed>>
+<<timed 2.3s>>[[Cualquiera de los dos uwu|c35]]<</timed>>
 
 
 :: c35 {"position":"1000,1500","size":"100,100"}
@@ -362,7 +359,7 @@ Es hora de encontrar una pareja.
 <</if>>
 
 
-:: death {"position":"200,1050","size":"100,100"}
+:: death {"position":"235,837","size":"100,100"}
 <<set $generation += 1>>\
 <<set $parent_life = $life>>\
 <<set $parent_res = $res>>\
@@ -387,7 +384,7 @@ Es hora de encontrar una pareja.
 <</if>>
 
 
-:: start {"position":"99,100","size":"100,100"}
+:: start {"position":"100,101","size":"100,100"}
 <<silently>>
 <<set $starting_combat_min = 1>>
 <<set $starting_combat_max = 5>>
@@ -484,13 +481,60 @@ Tu especie es $species
 <</if>>
 
 :: StoryStylesheet [stylesheet]
-.option{
-  span{
-  	display: none;
-  }
+body{
+  
 }
-.option:hover{
-  span{
-    display: block;
-  }
+
+.link-internal{
+	color: white;
+  	text-decoration: none;
+  	cursor: hover;
+  	position: relative;
+  	font-size: 18px;
+}
+
+.link-internal:hover{
+	color: white;
+  	font-weight: bold;
+  	font-size: 20px;
+}
+
+.link-internal:before{
+  	position: absolute;
+  	content: "►";
+  	top: calc(-50% + 3px);
+  	left: -25px;
+  	color: white;
+  	font-weight: bold;
+  	display: none
+}
+
+.link-internal:hover:before{
+  display: block;
+  top: calc(-50% + 5px);
+}
+
+#story-caption{
+  text-align: left;
+  margin-left: 20px;
+}
+
+.very-easy{
+	color: green;
+}
+
+.easy{
+	color: yellow;
+}
+
+.hard{
+	color: orange;
+}
+
+.very-hard{
+	color: red;
+}
+
+.bold{
+	font-weight: bold;
 }

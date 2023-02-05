@@ -1,5 +1,5 @@
 :: StoryTitle
-Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la era moderna como un insecto
+Era un crustáceo en el a finales de la era paleozoica y fui reencarnado en la era moderna como un insecto
 
 
 :: StoryData
@@ -16,9 +16,18 @@ Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la er
 }
 
 
+:: StoryAuthor {"position":"250,25","size":"100,100"}
+Por @Sokwha, @Godly_pie y @Fellow
+
+
+:: StoryBanner {"position":"375,50","size":"100,100"}
+<img src="https://universitam.com/academicos/wp-content/uploads/2011/12/camaronamalo.jpg" width="220" height="220">
+
+
 :: StoryCaption {"position":"334.5,139","size":"100,100"}
 <<if $name>>
-''Name'': ''$name''
+<span class="title">''$name''</span>\
+<span class="sub-title">''Estadisticas''</span>
 ''Vida'': ''$life''
 ''Resistencia'': ''$res''
 ''Camuflaje'': ''$camo''
@@ -28,17 +37,22 @@ Era un crustaceo en el a finales de la era paleozoica y fui reencarnado en la er
 
 :: c01 {"position":"98,225","size":"100,100"}
 <<unset $name>>
+
+<<silently>>
 <<include [[StoryCaption]]>>
+<<include [[StoryBanner]]>>
+<<include [[StoryAuthor]]>>
+<</silently>>
 
 Todo está oscuro. A donde sea que mires el vacío impera pero no sientes miedo. De hecho no sientes nada. 
 
-<<timed 2s>>
+<<timed 1.5s>>
 ''¿Siquiera estás vivo?''
 <</timed>>
 
-<<timed 4s>>[[Sí|c02]]<</timed>>
-<<timed 4.15s>>[[No|c02]]<</timed>>
-<<timed 4.3s>>[[No sé, tú dime|c02]]<</timed>>
+<<timed 2s>>[[Sí|c02]]<</timed>>
+<<timed 2.15s>>[[No|c02]]<</timed>>
+<<timed 2.3s>>[[No sé, tú dime|c02]]<</timed>>
 
 
 :: c02 {"position":"100,350","size":"100,100"}
@@ -968,6 +982,10 @@ body{
   
 }
 
+#ui-bar{
+  width: 21.5em;
+}
+
 .link-internal{
 	color: white;
   	text-decoration: none;
@@ -999,7 +1017,7 @@ body{
 
 #story-caption{
   text-align: left;
-  margin-left: 20px;
+  padding-left: 20px;
 }
 
 .very-easy{
@@ -1044,3 +1062,28 @@ body{
     color: white;
   	border: 1px green;
  }
+
+#story-author{
+  border-top: 2px white solid;
+  padding-top: 30px;
+}
+
+#story-caption{
+	border-top: 2px white solid;
+  	border-bottom: 2px white solid;
+  	padding-bottom: 20px
+}
+
+#story-caption .sub-title{
+	font-size: 18px;
+  	padding-top: 10px;
+  	padding-bottom: 10px;
+}
+#story-caption .title{
+	font-size: 20px;
+  	padding-top: 5px;
+  	padding-bottom: 5px;
+  	width: 100%;
+    display: block;
+    text-align: center;
+}

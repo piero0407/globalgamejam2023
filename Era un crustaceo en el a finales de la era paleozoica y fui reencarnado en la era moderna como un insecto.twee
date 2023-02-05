@@ -134,15 +134,17 @@ Chance: Muy Facil (%<<print ($chance_event_max - $chance_event_difficulty[0]) / 
 \::[[Pasar de largo|c16]]
 
 
-:: c11 {"position":"750,275","size":"100,100"}
-<<set $res += 2>>\
+:: c11 {"position":"800,375","size":"100,100"}
+<<set $amount_increased = 2>><<include [[res increased]]>>
+
+
 Encontraste una concha. La puedes usar como protección y camuflaje.
 
 
 \::[[Continuar|c31]]
 
 
-:: c11&c12 {"position":"700,150","size":"100,100"}
+:: c11&c12 {"position":"750,250","size":"100,100"}
 <<include [[chance event]]>>\
 <<if $chance_result === true>>
 <<include [[c11]]>>
@@ -151,22 +153,39 @@ Encontraste una concha. La puedes usar como protección y camuflaje.
 <</if>>
 
 
-:: c12 {"position":"625,275","size":"100,100"}
-\::[[Continuar|c31]]
+:: c12 {"position":"700,375","size":"100,100"}
+Parece ser el exoesqueleto de algún animal. Puede ser peligroso así que lo dejas ahí y te vas corriendo. Run bitch.
 
 
-:: c12&c14 {"position":"550,150","size":"100,100"}
+\::[[Run bitch.|c13]] | Chance: Muy Facil (80%)
+\::[[Run bitch. But faster.|c13]]
+
+
+:: c12&c14 {"position":"550,250","size":"100,100"}
 <<include [[camo event]]>>\
-<<if $camo_result === true>>
-<<include [[c14]]>>
-<<else>>
+<<if $camo_result === -1>>
 <<include [[c12]]>>
+<<else>>
+<<include [[c14]]>>
 <</if>>
 
 
-:: c14 {"position":"500,275","size":"100,100"}
-<<set $camo += 2>>\
+:: c13 {"position":"700,600","size":"100,100"}
+<<set $amount_increased = 1>><<include [[spd increased]]>>
+
+
+Huyes por tu vida sin mirar atrás.
+
+
+\::[[Siguiente|c31]]
+
+
+:: c14 {"position":"550,375","size":"100,100"}
+<<set $amount_increased = -2>><<include [[life increased]]>>
+
+
 Encontraste una cuevita.
+
 
 \::[[Siguiente|c31]]
 
@@ -182,49 +201,61 @@ Nacer difícil. Te quedas mimi. zzzzz
 Oh, no. Parece que no fuiste la única existencia creada. Ahí viene una existencia.
 
 
-\::[[Huyo|c18&c19][$current_event_difficulty = 0]]
-\::[[Busco dónde esconderme|c20&c21][$current_event_difficulty = 0]]
+\::[[Huyo|c18&c19][$event_difficulty = 0]]
+\::[[Busco dónde esconderme|c20&c21][$event_difficulty = 0]]
 \::[[Peleo|c23&c24&c25]]
-\::[[Espero comprobar si la existencia es hostil o no.|c26&c27][$current_event_difficulty = 2]]
+\::[[Espero comprobar si la existencia es hostil o no.|c26&c27][$event_difficulty = 2]]
 
 
-:: c18 {"position":"1050,275","size":"100,100"}
-<<set $spd += 1>>Huiste ^^
+:: c18 {"position":"1050,375","size":"100,100"}
+<<include [[spd increased][$amount_increased = 1]]>>
+
+
+Huiste ^^
 
 
 \::[[Siguiente|c31]]
 
 
-:: c18&c19 {"position":"1000,150","size":"100,100"}
+:: c18&c19 {"position":"1000,250","size":"100,100"}
 <<include [[spd event]]>>\
-<<if $camo_result === true>>
+<<if $camo_result === -1>>
 <<include [[c19]]>>
 <<else>>
 <<include [[c18]]>>
 <</if>>
 
 
-:: c19 {"position":"950,275","size":"100,100"}
-<<set $life -= 2>>Te quitaron una antena.
+:: c19 {"position":"950,375","size":"100,100"}
+<<set $amount_increased = -2>><<include [[life increased]]>>
+
+
+Te quitaron una antena.
 
 
 \::[[Siguiente|c31]]
 
 
-:: c20 {"position":"1175,275","size":"100,100"}
-<<set $camo += 1>>Encuentro una cuevita.
+:: c20 {"position":"1175,375","size":"100,100"}
+<<set $amount_increased = 1>><<include [[camo increased]]>>
 
 
-:: c20&c21 {"position":"1225,150","size":"100,100"}
+Encuentro una cuevita.
+
+
+\::[[Siguiente|c31]]
+
+
+:: c20&c21 {"position":"1225,250","size":"100,100"}
 <<include [[camo event]]>>\
-<<if $camo_result === true>>
+<<if $camo_result === -1>>
 <<include [[c21]]>>
 <<else>>
 <<include [[c20]]>>
 <</if>>
 
 
-:: c21 {"position":"1275,275","size":"100,100"}
+:: c21 {"position":"1275,375","size":"100,100"}
 Es campo abierto. Jaja salu2.
 
 
@@ -237,25 +268,33 @@ Tu cuerpo se convierte en parte de la evolución. Tu adn se fusiona con la exist
 \::[[Siguiente|c01]
 
 
-:: c23 {"position":"1400,275","size":"100,100"}
+:: c23 {"position":"1400,375","size":"100,100"}
+<<set $amount_increased = -1>><<include [[life increased]]>>, \
+<<set $amount_increased = 1>><<include [[res increased]]>>
+
+
 Lo vences y aprovechas para recolectar alimento.
 
 
 \::[[Siguiente|c31]]
 
 
-:: c23&c24&c25 {"position":"1450,150","size":"100,100"}
+:: c23&c24&c25 {"position":"1450,250","size":"100,100"}
 <<include [[res event]]>>\
-<<if $res_result === true && $current_event_difficulty === 1>>
-<<include [[c23]]>>
-<<elseif $res_result === true && $current_event_difficulty === 0>>
+<<if $res_result === -1>>
+<<include [[c25]]>>
+<<elseif $res_result === 0>>
 <<include [[c24]]>>
 <<else>>
-<<include [[c25]]>>
+<<include [[c23]]>>
 <</if>>
 
 
-:: c24 {"position":"1500,275","size":"100,100"}
+:: c24 {"position":"1500,375","size":"100,100"}
+<<set $amount_increased = -3>><<include [[life increased]]>>, \
+<<set $amount_increased = 1>><<include [[spd increased]]>>
+
+
 Te deja mal herido pero logras escapar.
 
 
@@ -263,13 +302,18 @@ Te deja mal herido pero logras escapar.
 
 
 :: c25 {"position":"1500,500","size":"100,100"}
+<<set $amount_increased = -2>><<include [[life increased]]>>, \
+<<set $amount_increased = -1>><<include [[spd increased]]>>, \
+<<set $amount_increased = -1>><<include [[res increased]]>>
+
+
 Ambos midieron sus fuerzas y son iguales. Se van pero mirándose grueso.
 
 
 \::[[Siguiente|c31]]
 
 
-:: c26 {"position":"1700,0","size":"100,100"}
+:: c26 {"position":"1700,100","size":"100,100"}
 La existencia es hostil
 
 
@@ -278,7 +322,7 @@ La existencia es hostil
 \::[[Peleo|c23&c24&c25]]
 
 
-:: c26&c27 {"position":"1700,150","size":"100,100"}
+:: c26&c27 {"position":"1700,250","size":"100,100"}
 <<include [[chance event]]>>\
 <<if $chance_result === true>>
 <<include [[c26]]>>
@@ -294,7 +338,7 @@ La existencia no es hostil.
 \::[[Siguiente|c31]]
 
 
-:: c28 {"position":"1000,700","size":"100,100"}
+:: c28 {"position":"1025,500","size":"100,100"}
 Mientras más nadas, más te acostumbras a tu nuevo cuerpo y al nuevo ambiente. Buscas comida mientras te fijas si hay más existencias.
 
 Entraste a un nuevo sector.
@@ -304,18 +348,39 @@ Parece que el agua es más dulce. Qué curioso. Todo despejado, parece que no ha
 Espera, hay un objeto ahí, ¿qué es eso?
 
 
-\::[[Acercarse|c25]]
-\::[[Te da miedo lo desconocido y pasas de largo|c25]]
+\::[[Acercarse|c29]]
+\::[[Te da miedo lo desconocido y pasas de largo|c30]]
 
 
-:: c31 {"position":"1000,1000","size":"100,100"}
+:: c29 {"position":"975,625","size":"100,100"}
+<<set $amount_increased = 2>><<include [[life increased]]>>
+
+
+Encontraste un grupo de protozoarios. Te alimentas hasta quedar satisfecho y eres una existencia feliz.
+
+
+\::[[Siguiente|c31]]
+
+
+:: c30 {"position":"1075,625","size":"100,100"}
+<<set $amount_increased = -2>><<include [[life increased]]>>, \
+<<set $amount_increased = -1>><<include [[res increased]]>>
+
+
+Sigues buscando alimento pero parece que no hay nada en leguas. Tu pancita suena. Parece que alguien se irá a dormir sin comer.
+
+
+\::[[Siguiente|c31]]
+
+
+:: c31 {"position":"1050,800","size":"100,100"}
 Mira… a la que en un futuro conocerán como luna, se oculta y comienza un nuevo día. Un día más ……agregar texto aquí……. . “El futuro es de aquellos que siguen avanzando”.
 
 
 \::[[Continuar|c32]]
 
 
-:: c32 {"position":"1000,1125","size":"100,100"}
+:: c32 {"position":"1175,800","size":"100,100"}
 Eres una existencia en constante crecimiento. Cada día que pasa aprendes más sobre este mundo y sobre ti. Mira tus patitas, son cinco pares preciosos  cada vez más fuertes, cada vez más largos. Tus habilidades de supervivencia han cambiado también: algunas aumentaron, algunas disminuyeron. Lo cierto es que no eres el mismo que inició este viaje.
 
 
@@ -323,14 +388,14 @@ Eres una existencia en constante crecimiento. Cada día que pasa aprendes más s
 \::[[No sé, ah… siento que falta más|c33]]
 
 
-:: c33 {"position":"1000,1250","size":"100,100"}
+:: c33 {"position":"925,800","size":"100,100"}
 Vamos por el siguiente paso entonces.
 
 
 \::[[Siguiente|c34]]
 
 
-:: c34 {"position":"1000,1375","size":"100,100"}
+:: c34 {"position":"800,800","size":"100,100"}
 Es hora de encontrar una pareja. 
 ¿En qué mood estás hoy día, pequeña existencia?
 
@@ -340,29 +405,372 @@ Es hora de encontrar una pareja.
 \::[[Cualquiera de los dos uwu|c35]]
 
 
-:: c35 {"position":"1000,1500","size":"100,100"}
+:: c35 {"position":"800,925","size":"100,100"}
+El éxito de tu reproducción dependerá de cuánto hayas aumentado tus habilidades. Solo los mejores genes sobrevivirán al feroz proceso de la evolución. Espero que estés lista, pequeña criatura.
+
+Ahora, vamos a buscar una existencia que esté a la altura de tus cualidades. Las criaturas no lloran, las criaturas facturan…huevecillos.
 
 
+\::[[Estoy lista.|c36&c37][$event_difficulty = 1]]
+\::[[Cambié de parecer. No quiero esa responsabilidad.|c40]]
 
-:: camo event {"position":"550,0","size":"100,100"}
-<<if $camo>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $camo_result = true>>Lograste camuflarte!
+
+:: c36 {"position":"650,850","size":"100,100"}
+Oh, pequeña criatura. Tu existencia no es suficiente para producir vidas. Regresa cuando tengas más energía.
+
+
+\::[[Siguiente|c40]]
+
+
+:: c36&43 {"position":"1050,1050","size":"100,100"}
+<<include [[chance event]]>>\
+<<if $chance_result === true>>
+<<include [[c43]]>>
 <<else>>
-<<set $camo_result = false>>No lograste camuflarte...
+<<include [[c36]]>>
 <</if>>
 
 
-:: chance event {"position":"700,0","size":"100,100"}
+:: c36&c37 {"position":"800,1050","size":"100,100"}
+<<include [[chance event]]>>\
+<<if $chance_result === true>>
+<<include [[c37]]>>
+<<else>>
+<<include [[c36]]>>
+<</if>>
+
+
+:: c37 {"position":"800,1175","size":"100,100"}
+Es momento de lanzar feromonas. Sacúdete, nena.
+
+
+\::[[Procedo a sacudirme con violencia. No tengo 5 pares de patas por las puras.|c38&c39a][$event_difficulty = 1]]
+\::[[Me sacudo moderadamente. Una tiene que guardar la dignidad.|c38&c39b][$event_difficulty = 2]]
+
+
+:: c38 {"position":"550,1225","size":"100,100"}
+<<set $amount_increased = 1>><<include [[life increased]]>>, \
+<<set $amount_increased = 1>><<include [[res increased]]>>, \
+<<set $amount_increased = 1>><<include [[camo increased]]>>, \
+<<set $amount_increased = 1>><<include [[spd increased]]>>
+
+
+Vino un criaturón dispuesto a fecundar tus huevecillos. Eres el éxito reproductivo.
+
+
+\::[[Continuar|c41]]
+
+
+:: c38&c39a {"position":"675,1125","size":"100,100"}
+<<include [[camo event]]>>\
+<<if $camo_result === -1>>
+<<include [[c39]]>>
+<<else>>
+<<include [[c38]]>>
+<</if>>
+
+
+:: c38&c39b {"position":"675,1225","size":"100,100"}
+<<include [[chance event]]>>\
+<<if $chance_result === true>>
+<<include [[c39]]>>
+<<else>>
+<<include [[c38]]>>
+<</if>>
+
+
+:: c39 {"position":"550,1125","size":"100,100"}
+Vino un criatura pequeña y curiosilla pero parece dispuesto a fecundar tus huevecillos. Esperemos que al menos la mitad de tus hijos sobrevivan. Hey, pero lo hiciste.
+
+
+\::[[Continuar|c40]]
+
+
+:: c40 {"position":"550,1000","size":"100,100"}
+No te preocupes. No te reproduces y eventualmente mueres sola, devorada por un depredador de estaba de paso. Tu adn se combina con la materia orgánica que eventualmente sirve para la creación de nuevas criaturas.
+
+
+\::[[Continuar|c01]]
+
+
+:: c41 {"position":"550,1350","size":"100,100"}
+Eventualmente mueres *insertar decendiente bicho*
+
+
+\::[[Siguiente|i01]]
+
+
+:: c42 {"position":"1050,925","size":"100,100"}
+\::[[Estoy listo.|c36&43][$event_difficulty = 1]]
+\::[[Cambié de parecer. No quiero esa responsabilidad.|c60]]
+
+
+:: c43 {"position":"1050,1175","size":"100,100"}
+Es momento de buscar feromonas.
+
+
+\::[[Procedo a caminar 10 leguas a la redonda.|c44&c45a][$event_difficulty = 1]]
+\::[[Procedo a caminar por mi sector.|c44&c45b][$event_difficulty = 3]]
+\::[[Cambié de parecer. No quiero esa responsabilidad.|c60]]
+
+
+:: c44 {"position":"1325,1125","size":"100,100"}
+<<set $amount_increased = 1>><<include [[life increased]]>>, \
+<<set $amount_increased = 1>><<include [[res increased]]>>, \
+<<set $amount_increased = 1>><<include [[camo increased]]>>, \
+<<set $amount_increased = 1>><<include [[spd increased]]>>
+
+
+Encontraste un criaturón que te mira con ojos de deseo y sus antenas claman para que te acerques y le des todo tu amor.
+
+
+\::[[Continuar|c46]]
+
+
+:: c44&c45a {"position":"1200,1125","size":"100,100"}
+<<include [[res event]]>>\
+<<if $res_result === -1>>
+<<include [[c45]]>>
+<<else>>
+<<include [[c44]]>>
+<</if>>
+
+
+:: c44&c45b {"position":"1200,1225","size":"100,100"}
+<<include [[chance event]]>>\
+<<if $chance_result === true>>
+<<include [[c44]]>>
+<<else>>
+<<include [[c45]]>>
+<</if>>
+
+
+:: c45 {"position":"1325,1225","size":"100,100"}
+Encontraste una pequeña criatura que te mira con ojos brillantes y te acercas tímidamente para darle toda tu ternura.
+
+
+\::[[Continuar|c46]]
+
+
+:: c46 {"position":"1325,1350","size":"100,100"}
+Te reprodujiste con éxito. Sobreviviste hasta este punto y evolucionaste. Darwin estaría orgulloso.
+
+\::[[Continuar|c41]]
+
+
+:: c47 {"position":"1700,800","size":"100,100"}
+No hay nadie menos afortunado que el crustáceo a quien la adversidad olvida, pues no tiene la oportunidad de ponerse a prueba.
+Este mundo está lleno de lugares y eventos que se crean y recrean todo el tiempo. Debes estar dispuesto a enfrentar los retos que se te pongan en frente o el mundo terminará tragándote sin opción a reclamo. Explora, descubre y… Sobrevive.
+
+Espera… eso que viene ahí, ¿qué rayos es?
+Acaso, ¿es una corriente? O no, si te dejas arrastrar por ella podría llevarte por lugares que aún no exploras. ¿Qué harás?"
+
+\::[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]
+\::[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]
+\::[[Buscas ayuda de otras criaturas|c53&c54][$event_difficulty = 3]]
+
+
+
+
+
+
+
+:: c48 {"position":"1575,1050","size":"100,100"}
+<<set $amount_increased = 1>><<include [[res increased]]>>, \
+<<set $amount_increased = -1>><<include [[camo increased]]>>
+
+
+Resistes pero estás en un área nueva y desconocida con algunas criaturas sobrevivientes.
+
+
+\::[[Siguiente|c41]]
+
+
+:: c48&c49&c50 {"position":"1575,925","size":"100,100"}
+<<include [[res event]]>>\
+<<if $res_result === -1>>
+<<include [[c50]]>>
+<<elseif $res_result === 0>>
+<<include [[c49]]>>
+<<else>>
+<<include [[c48]]>>
+<</if>>
+
+
+:: c49 {"position":"1700,1050","size":"100,100"}
+<<set $amount_increased = 1>><<include [[res increased]]>>, \
+<<set $amount_increased = -2>><<include [[life increased]]>>
+
+
+No resistes. Tienes daños.
+
+
+\::[[Siguiente|c41]]
+
+
+:: c50 {"position":"1450,1050","size":"100,100"}
+No resistes. Tu visión se va apagando. De pronto...
+
+
+\::[[Continuar|c01]]
+
+
+:: c51 {"position":"1925,1050","size":"100,100"}
+<<set $amount_increased = 1>><<include [[spd increased]]>>
+
+
+Escapas, vez cómo otras criaturas se van con la corriente.
+
+
+\::[[Siguiente|c41]]
+
+
+:: c51&c52 {"position":"1875,925","size":"100,100"}
+<<include [[spd event]]>>\
+<<if $camo_result === -1>>
+<<include [[c52]]>>
+<<else>>
+<<include [[c51]]>>
+<</if>>
+
+
+:: c52 {"position":"1825,1050","size":"100,100"}
+No escapas.
+
+
+\::[[Intentas Resistir|c48&c49&c50]]
+\::[[Te dejas llevar.|c50]]
+
+
+:: c53 {"position":"2050,1050","size":"100,100"}
+Se juntan para resistir juntos la corriente y sobrevivir lo más posible
+
+
+\::[[Tratan juntos de resistir|c56&c57]]
+\::[[Tratan juntos de escapar|c58&c59]]
+
+
+:: c53&c54 {"position":"2100,925","size":"100,100"}
+<<include [[chance event]]>>\
+<<if $chance_result === true>>
+<<include [[c53]]>>
+<<else>>
+<<include [[c54]]>>
+<</if>>
+
+
+:: c54 {"position":"2150,1050","size":"100,100"}
+Te ignoran.
+
+
+\::[[Continuar|c55]]
+
+
+:: c55 {"position":"2200,700","size":"100,100"}
+Debes elegir nuevamente.
+
+\::[[Tratas de resistir y te dejas llevar. Es la mejor manera de explorar nuevos lugares, ¿no?|c48&c49&c50]]
+\::[[Trato de escapar. Esta corriente no podrá con mis 5 pares de patas.|c51&c52]]
+
+
+:: c56 {"position":"2000,1300","size":"100,100"}
+<<set $amount_increased = 1>><<include [[life increased]]>>, \
+<<set $amount_increased = 1>><<include [[res increased]]>>
+
+
+Resisten, como una colonia se han unido y han sobrevivido. Algunos con algunos daños menores. Estas sorprendentemente ilesa.
+
+
+\::[[Siguiente|c34]]
+
+
+:: c56&c57 {"position":"1950,1175","size":"100,100"}
+<<include [[res event]]>>\
+<<if $res_result === -1>>
+<<include [[c57]]>>
+<<else>>
+<<include [[c56]]>>
+<</if>>
+
+
+:: c57 {"position":"1900,1300","size":"100,100"}
+<<set $amount_increased = -2>><<include [[life increased]]>>, \<<set $amount_increased = -2>><<include [[res increased]]>>
+
+
+No resisten. Tienen daños mayores. Están perdidos. Pero están juntos.
+
+
+\::[[Siguiente|c34]]
+
+
+:: c58 {"position":"2200,1300","size":"100,100"}
+<<set $amount_increased = 1>><<include [[spd increased]]
+
+
+Escapan. Todos a salvo.
+
+
+\::[[Siguiente|c34]]
+
+
+:: c58&c59 {"position":"2150,1175","size":"100,100"}
+<<include [[spd event]]>>\
+<<if $spd_result === -1>>
+<<include [[c59]]>>
+<<else>>
+<<include [[c58]]>>
+<</if>>
+
+
+:: c59 {"position":"2100,1300","size":"100,100"}
+No escapan.
+
+
+\::[[Tratan juntos de resistir.|c56&c57]]
+
+
+:: c60 {"position":"1250,1000","size":"100,100"}
+No te preocupes. No te reproduces y eventualmente mueres solo, devorado por un depredador de estaba de paso. Tu adn se combina con la materia orgánica que eventualmente sirve para la creación de nuevas criaturas.
+
+
+\::[[Continuar|c01]]
+
+
+:: camo event {"position":"550,100","size":"100,100"}
+<<silently>>
+<<set $camo_result = -1>>
+<<for _i, _difficulty_level range $skill_event_difficulty>>
+  <<if $camo>=$skill_event_difficulty[_i]>>
+  	<<set $camo_result = _i>>
+  <</if>>
+<</for>>
+<</silently>>
+
+
+:: camo increased {"position":"550,0","size":"100,100"}
+<<set $camo += $amount_increased>>\
+<<if $amount_increased > 0>>\
+<<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
++\
+<</for>>\
+<<elseif $amount_increased < 0>>\
+<<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
+-\
+<</for>>\
+<</if>>Camuflaje\
+
+
+:: chance event {"position":"750,100","size":"100,100"}
 <<set $roll = random($chance_event_min, $chance_event_max)>>\
 \
-<<if $roll >= $chance_event_difficulty[$current_event_difficulty]>>
-<<set $chance_result = true>>Buen trabajo!
+<<if $roll >= $chance_event_difficulty[$event_difficulty]>>
+	<<set $chance_result = true>>\
 <<else>>
-<<set $chance_result = false>>Fallaste...
+	<<set $chance_result = false>>\
 <</if>>
 
 
-:: death {"position":"200,1050","size":"100,100"}
+:: death {"position":"200,950","size":"100,100"}
 <<set $generation += 1>>\
 <<set $parent_life = $life>>\
 <<set $parent_res = $res>>\
@@ -371,55 +779,28 @@ Es hora de encontrar una pareja.
 <<goto [[c01]]>>
 
 
-:: res event {"position":"1400,0","size":"100,100"}
-<<if $res>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $res_result = true>>Resistes!
-<<else>>
-<<set $res_result = false>>No logras resistir...
-<</if>>
+:: i01 {"position":"100,1600","size":"100,100"}
 
-
-:: spd event {"position":"1000,0","size":"100,100"}
-<<if $spd>=$skill_event_difficulty[$current_event_difficulty]>>
-<<set $spd_result = true>>Buena velocidad!
-<<else>>
-<<set $spd_result = false>>Eres muy lento...
-<</if>>
-
-
-:: start {"position":"99,100","size":"100,100"}
-<<silently>>
-<<set $starting_combat_min = 1>>
-<<set $starting_combat_max = 5>>
-<<set $combat_min = 1>>
-<<set $combat_max = 30>>
-<<set $combat_diff = 1>>
-
-<<set $starting_life_min = 10>>
-<<set $starting_life_max = 20>>
-<<set $life_min = 7>>
-<<set $life_max = 75>>
-<<set $life_diff = 2>>
-
-<<set $stat_reroll = 5>>
-<<set $current_stat_reroll = $stat_reroll>>
-<<set $generation = 0>>
-
-<<set $species = "">>
-
-<<set $skill_event_difficulty = [2, 4, 10, 15]>>
-
-<<set $chance_event_difficulty = [2, 4, 6, 8]>>
-<<set $chance_event_min = 1>>
-<<set $chance_event_max = 10>>
 
 <<set $current_event_difficulty = 0>>
 <</silently>>\
 \
 <<goto [[c01]]>>
 
+:: life increased {"position":"1225,0","size":"100,100"}
+<<set $life += $amount_increased>>\
+<<if $amount_increased > 0>>\
+<<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
++\
+<</for>>\
+<<elseif $amount_increased < 0>>\
+<<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
+-\
+<</for>>\
+<</if>>Vida\
 
-:: StoryScript [script]
+
+:: offspring stats {"position":"325,1125","size":"100,100"}
 <<silently>>
 
 <<set _life_mod = random(-1 * ($life_diff + $generation), $life_diff + $generation)>>
@@ -482,6 +863,87 @@ Tu especie es $species
 <<if $current_stat_reroll >= 1>>\
 \::[["Prueba denuevo ("+$current_stat_reroll+")"|c06][$current_stat_reroll -= 1]]
 <</if>>
+
+
+:: res event {"position":"1450,100","size":"100,100"}
+<<silently>>
+<<set $res_result = -1>>\
+<<for _i, _difficulty_level range $skill_event_difficulty>>
+  <<if $res>=$skill_event_difficulty[_i]>>
+  	<<set $res_result = _i>>\
+  <</if>>
+<</for>>
+<</silently>>
+
+
+:: res increased {"position":"1450,0","size":"100,100"}
+<<set $res += $amount_increased>>\
+<<if $amount_increased > 0>>\
+<<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
++\
+<</for>>\
+<<elseif $amount_increased < 0>>\
+<<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
+-\
+<</for>>\
+<</if>>Resistencia\
+
+
+:: spd event {"position":"1000,100","size":"100,100"}
+<<silently>>
+<<set $spd_result = -1>>\
+<<for _i, _difficulty_level range $skill_event_difficulty>>
+  <<if $spd>=$skill_event_difficulty[_i]>>
+  	<<set $spd_result = _i>>\
+  <</if>>
+<</for>>
+<</silently>>
+
+
+:: spd increased {"position":"1000,0","size":"100,100"}
+<<set $spd += $amount_increased>>\
+<<if $amount_increased > 0>>\
+<<for _i = 0; _i < $amount_increased && _i < 3; _i++>>\
++\
+<</for>>\
+<<elseif $amount_increased < 0>>\
+<<for _i = 0; _i > $amount_increased && _i > -3; _i-->>\
+-\
+<</for>>\
+<</if>>Velocidad\
+
+
+:: start {"position":"100,100","size":"100,100"}
+<<silently>>
+<<set $starting_combat_min = 1>>
+<<set $starting_combat_max = 5>>
+<<set $combat_min = 1>>
+<<set $combat_max = 30>>
+<<set $combat_diff = 1>>
+
+<<set $starting_life_min = 10>>
+<<set $starting_life_max = 20>>
+<<set $life_min = 7>>
+<<set $life_max = 75>>
+<<set $life_diff = 2>>
+
+<<set $stat_reroll = 5>>
+<<set $current_stat_reroll = $stat_reroll>>
+<<set $generation = 0>>
+
+<<set $species = "">>
+
+<<set $skill_event_difficulty = [2, 4, 10, 15]>>
+
+<<set $chance_event_difficulty = [2, 4, 6, 8]>>
+<<set $chance_event_min = 1>>
+<<set $chance_event_max = 10>>
+
+<<set $event_difficulty = 0>>
+<</silently>>\
+\
+<<goto [[c01]]>>
+
 
 :: StoryStylesheet [stylesheet]
 .option{
